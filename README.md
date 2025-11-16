@@ -1,27 +1,27 @@
 # Iris ML Application with Logging
 
-A demonstration project showcasing comprehensive logging implementation in a machine learning pipeline using the Iris dataset. This project illustrates best practices for logging at different levels (INFO, DEBUG, ERROR) and exception handling in ML workflows.
+A demonstration project showcasing the logging implementation in a machine learning pipeline using the Iris dataset. This lab illustrates best practices for logging at different levels (INFO, DEBUG, ERROR) and exception handling in ML workflows.
 
 ## Overview
 
-This application trains a Logistic Regression model on the Iris dataset while demonstrating proper logging practices throughout the ML pipeline. It includes two versions of the logger to show both normal execution and exception handling scenarios.
+This code trains a Logistic Regression model on the Iris dataset while demonstrating proper logging practices throughout the ML pipeline. It includes two versions of the logger to show both normal execution and exception handling scenarios.
 
 ## Features
 
 - **Multi-level Logging**: Implements INFO, DEBUG, WARNING, and ERROR level logging
 - **Dual Output**: Logs to both console (StreamHandler) and file (FileHandler)
-- **Exception Tracking**: Comprehensive error handling with detailed tracebacks
+- **Exception Tracking**: Error handling with detailed tracebacks
 - **ML Pipeline Coverage**: Logs every stage from data loading to model evaluation
 - **Demonstration Modes**: Includes both clean execution and intentional error scenarios
 
 ## Project Structure
 ```
-├── logger.py              # Main script with clean execution
-├── logger_error.py        # Script with intentional error for demo
-├── iris_app.log          # Log file from normal execution
-├── iris_app_error.log    # Log file with exception demonstration
-├── requirements.txt       # Project dependencies
-└── terminal_output.txt    # Sample console outputs
+logger.py             # Main script with clean execution
+logger_error.py       # Script with intentional error for demo
+iris_app.log          # Log file from normal execution
+iris_app_error.log    # Log file with exception demonstration
+requirements.txt      # Project dependencies
+terminal_output.txt   # Sample console outputs
 ```
 
 ## Requirements
@@ -84,23 +84,63 @@ The logger is configured with:
 ### Successful Execution
 ```
 Loading the Iris dataset...
+2025-11-16 18:36:36,426 - iris_ml_app - INFO - Loading the Iris dataset...
 Dataset shape: (150, 4), Labels shape: (150,)
+2025-11-16 18:36:36,428 - iris_ml_app - DEBUG - Dataset shape: (150, 4), Labels shape: (150,)
 Splitting dataset...
+2025-11-16 18:36:36,428 - iris_ml_app - INFO - Splitting dataset...
 Training size: (120, 4), Test size: (30, 4)
+2025-11-16 18:36:36,429 - iris_ml_app - DEBUG - Training size: (120, 4), Test size: (30, 4)
 Normalizing data with StandardScaler...
+2025-11-16 18:36:36,429 - iris_ml_app - INFO - Normalizing data with StandardScaler...
+Normalization complete.
+2025-11-16 18:36:36,430 - iris_ml_app - DEBUG - Normalization complete.
 Training Logistic Regression model...
+2025-11-16 18:36:36,430 - iris_ml_app - INFO - Training Logistic Regression model...
 Model training complete.
+2025-11-16 18:36:36,435 - iris_ml_app - INFO - Model training complete.
+Evaluating the model...
+2025-11-16 18:36:36,435 - iris_ml_app - INFO - Evaluating the model...
 Model accuracy: 1.0000
+2025-11-16 18:36:36,436 - iris_ml_app - INFO - Model accuracy: 1.0000
 Program completed successfully with no errors.
+2025-11-16 18:36:36,436 - iris_ml_app - INFO - Program completed successfully with no errors.
 ```
 
 ### Exception Logging
 ```
+(logging) anirudhsayya@Anirudhs-MacBook-Pro logging_lab5 % python3 logger.py 
+Loading the Iris dataset...
+2025-11-16 18:33:40,974 - iris_ml_app - INFO - Loading the Iris dataset...
+Dataset shape: (150, 4), Labels shape: (150,)
+2025-11-16 18:33:40,976 - iris_ml_app - DEBUG - Dataset shape: (150, 4), Labels shape: (150,)
+Splitting dataset...
+2025-11-16 18:33:40,976 - iris_ml_app - INFO - Splitting dataset...
+Training size: (120, 4), Test size: (30, 4)
+2025-11-16 18:33:40,976 - iris_ml_app - DEBUG - Training size: (120, 4), Test size: (30, 4)
+Normalizing data with StandardScaler...
+2025-11-16 18:33:40,976 - iris_ml_app - INFO - Normalizing data with StandardScaler...
+Normalization complete.
+2025-11-16 18:33:40,977 - iris_ml_app - DEBUG - Normalization complete.
+Training Logistic Regression model...
+2025-11-16 18:33:40,977 - iris_ml_app - INFO - Training Logistic Regression model...
+Model training complete.
+2025-11-16 18:33:40,983 - iris_ml_app - INFO - Model training complete.
+Evaluating model...
+2025-11-16 18:33:40,983 - iris_ml_app - INFO - Evaluating model...
+Model accuracy: 1.0000
+2025-11-16 18:33:40,983 - iris_ml_app - INFO - Model accuracy: 1.0000
 Demonstrating exception logging with a deliberate error...
+2025-11-16 18:33:40,983 - iris_ml_app - INFO - Demonstrating exception logging with a deliberate error...
 An error occurred: division by zero in demo block
 Traceback (most recent call last):
-  File "logger.py", line 111, in <module>
-    faulty_calc = 10 / 0
+  File "/Users/anirudhsayya/Documents/Mylabs_mlops/Github_Labs/Lab5_logging/logging_lab5/logger.py", line 111, in <module>
+    faulty_calc = 10 / 0  # will raise ZeroDivisionError
+ZeroDivisionError: division by zero
+2025-11-16 18:33:40,983 - iris_ml_app - ERROR - An error occurred: division by zero in demo block
+Traceback (most recent call last):
+  File "/Users/anirudhsayya/Documents/Mylabs_mlops/Github_Labs/Lab5_logging/logging_lab5/logger.py", line 111, in <module>
+    faulty_calc = 10 / 0  # will raise ZeroDivisionError
 ZeroDivisionError: division by zero
 ```
 
@@ -122,7 +162,7 @@ This project demonstrates:
 - Logging best practices in ML pipelines
 - Debugging and monitoring production ML applications
 
-## Best Practices Illustrated
+## Best Practices Shown
 
 1. **Structured Logging**: Clear messages at each pipeline stage
 2. **Exception Handling**: Try-except blocks with logger.exception()
@@ -136,7 +176,3 @@ This project demonstrates:
 - Log files are created in the same directory as the script
 - The `logger.exception()` method automatically includes the full traceback
 - All ML operations are wrapped in try-except blocks for robust error handling
-
-## Author
-
-Created as part of MLOps Lab 5 - Logging demonstration for machine learning applications.
